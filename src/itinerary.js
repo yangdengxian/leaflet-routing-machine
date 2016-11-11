@@ -5,6 +5,9 @@
 	var Formatter = require('./formatter');
 	var ItineraryBuilder = require('./itinerary-builder');
 
+	/*
+	 * @class L.Routing.Itinerary
+	 */
 	module.exports = L.Control.extend({
 		includes: L.Mixin.Events,
 

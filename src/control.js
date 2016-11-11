@@ -8,15 +8,88 @@
 	var Plan = require('./plan');
 	var OSRMv1 = require('./osrm-v1');
 
+	/*
+	 * @class L.Routing.Control
+	 * Combining the other classes into a full routing user interface.
+	 * The main class of the plugin. Extends 
+	 * [`L.Routing.Itinerary`](#l-routing-itinerary) and implements 
+	 * [`IControl`](http://leafletjs.com/reference.html#icontrol).
+	 *
+	 * @example
+	 * 
+	 * ```javascript
+	 * var map = L.map('map');
+	 *
+ 	 * L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	 *     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	 * }).addTo(map);
+	 * 
+ 	 * L.Routing.control({
+	 *     waypoints: [
+	 *         L.latLng(57.74, 11.94),
+	 *         L.latLng(57.6792, 11.949)
+	 *     ]
+	 * }).addTo(map);
+	 * ```
+	 */
 	module.exports = Itinerary.extend({
 		options: {
+			/*
+			 * @option fitSelectedRoutes: String = "smart"
+			 * If set to "smart", map will fit to route if not at least one waypoint is visible,
+			 * or if route covers a very small part of the viewport; otherwise if truthy always
+			 * fit map to route, if falsy neve fit route
+			 */
 			fitSelectedRoutes: 'smart',
+
+			/*
+			 * @option routeLine: Function
+			 * Function to create the map line when a route is presented on the map, with the
+			 * signature: 
+			 * `fn(<`[`IRoute`](#iroute)`> route, <`[`LineOptions`](#lineoptions)`> options)`
+			 */
 			routeLine: function(route, options) { return new Line(route, options); },
+
+			/*
+			 * @option autoRoute: Boolean = true
+			 * If true, route will automatically be calculated every time waypoints change,
+			 * otherwise `route()` has to be called by the app
+			 */
 			autoRoute: true,
+
+			/*
+			 * @option routeWhileDragging: Boolean = false
+			 * If true, routes will continually be calculated while the user drags waypoints,
+			 * giving immediate feedback
+			 */
 			routeWhileDragging: false,
+
+			/*
+			 * @option routeDragInterval: Number = 500
+			 * The minimum number of milliseconds between route calculations when waypoints are dragged
+			 */
 			routeDragInterval: 500,
+
+			/*
+			 * @option waypointMode: String = "connect"
+			 * Set to either `connect` (waypoints are connected by a line to the closest point on the
+			 * calculated route) or `snap` (waypoints are moved to the closest point on the calculated
+			 * route)
+			 */
 			waypointMode: 'connect',
+
+			/*
+			 * @option showAlternatives: Boolean = false
+			 * If true, alternative polyline[s] will be shown on the map when available at the same
+			 * time as the primary polyline
+			 */
 			showAlternatives: false,
+
+			/*
+			 * @option defaultErrorHandler: Function
+			 * The default error handler that is added to the control's `routingerror` event if
+			 * truthy; default uses `console.error` to log the error
+			 */
 			defaultErrorHandler: function(e) {
 				console.error('Routing error:', e.error);
 			}

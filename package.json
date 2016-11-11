@@ -7,7 +7,7 @@
     "dist": "dist"
   },
   "scripts": {
-    "prepublish": "browserify -t browserify-shim -p browserify-derequire -o dist/leaflet-routing-machine.js src/index.js && uglifyjs dist/leaflet-routing-machine.js >dist/leaflet-routing-machine.min.js",
+    "prepublish": "browserify -t browserify-shim -p browserify-derequire -o dist/leaflet-routing-machine.js src/index.js && uglifyjs dist/leaflet-routing-machine.js >dist/leaflet-routing-machine.min.js && leafdoc --verbose -t node_modules/leafdoc/templates/basic --character @ -o api.html src/*.js",
     "publish": "scripts/publish.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -39,6 +39,7 @@
     "browserify-shim": "^3.7.0",
     "corslite": "0.0.7",
     "derequire": "^2.0.3",
+    "leafdoc": "^1.4.1",
     "polyline": "0.2.0",
     "uglify-js": "^2.7.4"
   },
