@@ -1,17 +1,17 @@
-var L = require('leaflet'),
-    Control = require('./control'),
-    Itinerary = require('./itinerary'),
-    Line = require('./line'),
-    OSRMv1 = require('./osrm-v1'),
-    Plan = require('./plan'),
-    Waypoint = require('./waypoint'),
-    Autocomplete = require('./autocomplete'),
-    Formatter = require('./formatter'),
-    GeocoderElement = require('./geocoder-element'),
-    Localization = require('./localization'),
-    ItineraryBuilder = require('./itinerary-builder'),
-    Mapbox = require('./mapbox'),
-    ErrorControl = require('./error-control');
+import L from 'leaflet';
+import Control from './control';
+import Itinerary from './itinerary';
+import OSRMv1 from './osrm-v1';
+import Plan from './plan';
+import Line from './line';
+import Waypoint from './waypoint';
+import Autocomplete from './autocomplete';
+import Formatter from './formatter';
+import GeocoderElement from './geocoder-element';
+import Localization from './localization';
+import ItineraryBuilder from './itinerary-builder';
+import Mapbox from './mapbox';
+import ErrorControl from './error-control';
 
 L.routing = {
     control: function(options) { return new Control(options); },
@@ -53,7 +53,7 @@ L.routing = {
     }
 };
 
-module.exports = L.Routing = {
+export default L.Routing = {
     Control: Control,
     Itinerary: Itinerary,
     Line: Line,

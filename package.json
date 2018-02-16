@@ -7,7 +7,7 @@
     "dist": "dist"
   },
   "scripts": {
-    "prepublish": "browserify -t browserify-shim -p browserify-derequire -o dist/leaflet-routing-machine.js src/index.js && uglifyjs dist/leaflet-routing-machine.js >dist/leaflet-routing-machine.min.js",
+    "prepublish": "rollup -c build/rollup.config.js && uglifyjs dist/leaflet-routing-machine.js >dist/leaflet-routing-machine.min.js",
     "publish": "scripts/publish.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -34,15 +34,23 @@
   },
   "main": "./dist/leaflet-routing-machine.js",
   "devDependencies": {
-    "browserify": "^14.1.0",
-    "browserify-derequire": "^0.9.4",
-    "browserify-shim": "^3.8.13",
-    "derequire": "^2.0.6",
+    "rollup": "^0.56.1",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
     "uglify-js": "^2.8.2"
   },
   "dependencies": {
     "@mapbox/corslite": "0.0.7",
     "@mapbox/polyline": "^0.2.0",
     "osrm-text-instructions": "^0.11.5"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    }
   }
 }
