@@ -1,6 +1,7 @@
 import json from 'rollup-plugin-json';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
+import sizes from 'rollup-plugin-sizes';
 
 export default {
   input: 'src/index.js',
@@ -15,7 +16,8 @@ export default {
   plugins: [
     json({ preferConst: true }),
     resolve({ browser: true }),
-    commonjs()
+    commonjs(),
+    sizes()
   ],
   external: ['leaflet']
 }
